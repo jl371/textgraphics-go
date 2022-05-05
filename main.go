@@ -199,15 +199,11 @@ func drawLine(length int, orientation int) {
 
 
 }
-
-func main(){
-	log.Println("things")
-	layer1.sc = InitScreen()
-	plotPixel(0,20)
-	movecursor(10,10)
-	for i:=0; i < 500; i++ {
+func AnimateStar(x int, y int, length int, repeats int) {
+	movecursor(x,y)
+	for i:=0; i < repeats; i++ {
 		setPen(true)
-		for j:=0; j < 8; j++ {
+		for j:=0; j < length; j++ {
 			drawLine(j,0)
 			drawLine(j,1)
 			drawLine(j,2)
@@ -221,7 +217,7 @@ func main(){
 		}
 		setPen(false)
 		
-		for k:=0; k < 8; k++ {
+		for k:=0; k < length; k++ {
 			drawLine(k,0)
 			drawLine(k,1)
 			drawLine(k,2)
@@ -235,6 +231,35 @@ func main(){
 		}
 
 	}
-	
+}
+func AnimateLine(x int, y int, length int, orientation int, repeats int) {
+	movecursor(x,y)
+	for i:=0; i < repeats; i++ {
+		setPen(true)
+		for j:=0; j < length; j++ {
+			setPen(true)
+		for j:=0; j < length; j++ {
+			drawLine(j,orientation)
+			DisplayMe()
+			time.Sleep(33 * time.Millisecond)
+		}
+		setPen(false)
+		
+		for k:=0; k < length; k++ {
+			drawLine(k,orientation)
+			DisplayMe()
+			time.Sleep(33 * time.Millisecond)
+		}
+		}
+	}
+}
+
+func main(){
+	log.Println("things")
+	layer1.sc = InitScreen()
+	plotPixel(0,20)
+	AnimateStar(10,10,8,5)
+	AnimateStar(20,20,6,8)
+	AnimateLine(20,10,10,0,1)
 
 }
