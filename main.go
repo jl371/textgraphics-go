@@ -2,6 +2,7 @@ package main
 import (
 	"log"
 	"fmt"
+	"time"
 )
 type Screen struct {
 	 sc [][]bool
@@ -29,6 +30,7 @@ func ResetCursor() {
 }
 func DisplayMe(){
 	fmt.Print("\033[H\033[2J")
+	
 	var totalscreen string
 	totalscreen+= "\n"
 	var currentline string
@@ -64,7 +66,11 @@ func movecursor(w int, z int) {
 	y = z
 }
 func drawLine(length int, orientation int) {
-	plotPixel(x,y)
+	if pen == true {
+		plotPixel(x,y)
+	} else {
+		removePixel(x,y)
+	}
 	switch (orientation) {
 	case 0:
 		//draw line upwards
@@ -199,14 +205,36 @@ func main(){
 	layer1.sc = InitScreen()
 	plotPixel(0,20)
 	movecursor(10,10)
-	drawLine(5,0)
-	drawLine(5,1)
-	drawLine(5,2)
-	drawLine(5,3)
-	drawLine(5,4)
-	drawLine(5,5)
-	drawLine(5,6)
-	drawLine(5,7)
-	DisplayMe()
+	for i:=0; i < 500; i++ {
+		setPen(true)
+		for j:=0; j < 8; j++ {
+			drawLine(j,0)
+			drawLine(j,1)
+			drawLine(j,2)
+			drawLine(j,3)
+			drawLine(j,4)
+			drawLine(j,5)
+			drawLine(j,6)
+			drawLine(j,7)
+			DisplayMe()
+			time.Sleep(33 * time.Millisecond)
+		}
+		setPen(false)
+		
+		for k:=0; k < 8; k++ {
+			drawLine(k,0)
+			drawLine(k,1)
+			drawLine(k,2)
+			drawLine(k,3)
+			drawLine(k,4)
+			drawLine(k,5)
+			drawLine(k,6)
+			drawLine(k,7)
+			DisplayMe()
+			time.Sleep(33 * time.Millisecond)
+		}
+
+	}
+	
 
 }
