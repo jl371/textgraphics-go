@@ -37,7 +37,7 @@ func DisplayMe(){
 	for i := 0; i < 30; i++ {
 		for j := 0; j < 80; j++ {
 			if layer1.sc[j][i] == true {
-				currentline += "#"
+				currentline += "█"
 			} else {
 				currentline += " "
 			}
@@ -62,8 +62,17 @@ func removePixel(w int, z int) {
 	layer1.sc[w][z] = false;
 }
 func movecursor(w int, z int) {
-	x = w
-	y = z
+	if (x > 80) {
+		x = 0 + w 
+	} else {
+		x = w
+	}
+	if (y > 30) {
+		y = 0 + z
+	} else {
+		y = z
+	}
+
 }
 func drawLine(length int, orientation int) {
 	if pen == true {
@@ -236,7 +245,7 @@ func AnimateLine(x int, y int, length int, orientation int, repeats int) {
 	movecursor(x,y)
 	for i:=0; i < repeats; i++ {
 		setPen(true)
-		for j:=0; j < length; j++ {
+		
 			setPen(true)
 		for j:=0; j < length; j++ {
 			drawLine(j,orientation)
@@ -250,16 +259,25 @@ func AnimateLine(x int, y int, length int, orientation int, repeats int) {
 			DisplayMe()
 			time.Sleep(33 * time.Millisecond)
 		}
-		}
+		
 	}
 }
-
+func drawSquare(x int, y int, size int) {
+	movecursor(x,y)
+	drawLine(size,4)
+	drawLine(size,2)
+	movecursor(x+size-1, y+size-1)
+	drawLine(size,0)
+	drawLine(size,6)
+	movecursor(x,y)
+}
 func main(){
 	log.Println("things")
 	layer1.sc = InitScreen()
 	plotPixel(0,20)
+	drawSquare(50, 0, 9)
 	AnimateStar(10,10,8,5)
 	AnimateStar(20,20,6,8)
-	AnimateLine(20,10,10,0,1)
-
+	AnimateLine(20,10,10,0,5)
+	
 }
