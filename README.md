@@ -5,7 +5,7 @@
 * Can plot points, lines and squares
 * Can animate stars and lines
 
-###Functions
+### Functions
 * movecursor(x,y) - moves cursor to specified point. This is where lines and squares originate.
 * reset() - blanks screen, resets cursor to 0,0
 * drawLine(length, orientation) - draws a line on the screen where the cursor is at, of length specified, in 8 different orientations. Going clockwise, 0 is line pointing up, 1 is diagonal going top right, etc.
