@@ -205,8 +205,8 @@ func drawLine(length int, orientation int) {
             }
             break
 	}
-
-
+	//DisplayMe()
+	//time.Sleep(33 * time.Millisecond)
 }
 func AnimateStar(x int, y int, length int, repeats int) {
 	movecursor(x,y)
@@ -270,14 +270,66 @@ func drawSquare(x int, y int, size int) {
 	drawLine(size,0)
 	drawLine(size,6)
 	movecursor(x,y)
+	DisplayMe()
+	time.Sleep(33 * time.Millisecond)
+}
+func reset() {
+	for i := 0; i < 30; i++ {
+		for j := 0; j < 80; j++ {
+			layer1.sc[j][i] = false
+		}
+	}
+	ResetCursor()
+	DisplayMe()
 }
 func main(){
 	log.Println("things")
 	layer1.sc = InitScreen()
 	plotPixel(0,20)
+	DisplayMe()
+	time.Sleep(33 * time.Millisecond)
+	plotPixel(5,20)
+	DisplayMe()
+	time.Sleep(33 * time.Millisecond)
+	plotPixel(10,20)
+	DisplayMe()
+	time.Sleep(33 * time.Millisecond)
+	plotPixel(15,20)
+	DisplayMe()
+	time.Sleep(33 * time.Millisecond)
+	plotPixel(20,20)
+	DisplayMe()
+	time.Sleep(33 * time.Millisecond)
+	plotPixel(79,30)
+	DisplayMe()
+	time.Sleep(33 * time.Millisecond)
+	plotPixel(3,3)
+	DisplayMe()
+	time.Sleep(33 * time.Millisecond)
 	drawSquare(50, 0, 9)
+	DisplayMe()
+	time.Sleep(33 * time.Millisecond)
+	drawSquare(45,0,5)
+	DisplayMe()
+	time.Sleep(33 * time.Millisecond)
 	AnimateStar(10,10,8,5)
 	AnimateStar(20,20,6,8)
+	AnimateStar(50,25,4,4)
 	AnimateLine(20,10,10,0,5)
-	
+	for i:= 0; i < 8; i++ {
+		AnimateLine(50,25,5,i,2)
+	}
+	movecursor(10,5)
+	for i:=0; i < 7; i++ {
+		setPen(true)
+		movecursor(x+i,y+i)
+		drawLine(6,1)
+		DisplayMe()
+		time.Sleep(33 * time.Millisecond)
+		drawLine(6,5)
+		drawLine(6,7)
+		DisplayMe()
+		time.Sleep(33 * time.Millisecond)
+
+	}
 }
